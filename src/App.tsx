@@ -3,10 +3,19 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 import waterGlass from '@/assets/water-glass.png'
 import Countdown from 'react-countdown';
 import CountdownRenderer from './components/CountdownRenderer';
+import { useEffect } from 'react';
+import PushNotificationService from './services/push-notification-service';
 
 export default function App() {
   const now = Date.now()
-  const expirationDate = now + (10 * 1000)
+  const expirationTime = (10 * 1000)
+  const expirationDate = now + expirationTime
+  
+  useEffect(() => {
+    const pushNotificationService = new PushNotificationService()
+
+    pushNotificationService.scheduleLocalNotification(expirationTime)
+  }, [])
 
   return (
     <View style={styles.container}>
