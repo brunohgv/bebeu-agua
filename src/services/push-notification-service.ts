@@ -5,6 +5,10 @@ enum Status {
 }
 
 export default class PushNotificationService {
+    async removeScheduledNotifications(): Promise<void> {
+        Notifications.cancelAllScheduledNotificationsAsync()
+    }
+    
     async scheduleLocalNotification(milliseconds: number): Promise<void> {
         const { status } = await Notifications.requestPermissionsAsync();
     
